@@ -1,0 +1,162 @@
+BODY
+{
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 10pt
+}
+TD.leftpane
+{
+    BORDER-BOTTOM: #008cd6 2px;
+    BORDER-LEFT: #008cd6 2px;
+    BORDER-RIGHT: #008cd6 2px solid;
+    BORDER-TOP: #008cd6 2px
+}
+TD.contentpane
+{
+    BORDER-BOTTOM: #008cd6;
+    BORDER-LEFT: #008cd6 2px;
+    BORDER-RIGHT: #008cd6;
+    BORDER-TOP: #008cd6
+}
+TD.rightpane
+{
+    BORDER-BOTTOM: #008cd6;
+    BORDER-LEFT: #008cd6 2px;
+    BORDER-RIGHT: #008cd6;
+    BORDER-TOP: #008cd6
+}
+TD.bottompane
+{
+    BORDER-BOTTOM: #008cd6;
+    BORDER-LEFT: #008cd6;
+    BORDER-RIGHT: #008cd6;
+    BORDER-TOP: #008cd6 2px solid;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 8pt
+}
+TABLE.Ads
+{
+    BORDER-BOTTOM: orange solid;
+    BORDER-LEFT: orange solid;
+    BORDER-RIGHT: orange solid;
+    BORDER-TOP: orange solid;
+    FONT-FAMILY: Arial
+}
+TD.AdsTitle
+{
+    BACKGROUND-COLOR: navajowhite;
+    BORDER-BOTTOM: orange solid;
+    BORDER-LEFT: orange;
+    BORDER-RIGHT: orange;
+    BORDER-TOP: orange;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 12pt;
+    FONT-WEIGHT: bolder
+}
+TD.AdsDetail
+{
+    BORDER-BOTTOM: medium none;
+    BORDER-LEFT: lightskyblue;
+    BORDER-RIGHT: lightskyblue;
+    BORDER-TOP: lightskyblue;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 10pt
+}
+TD.AboutTitle
+{
+    COLOR: dodgerblue;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 22pt;
+    FONT-WEIGHT: bolder
+}
+TD.AboutUs
+{
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 10pt;
+    FONT-STYLE: italic;
+    FONT-WEIGHT: bolder;
+    LIST-STYLE: disc
+}
+TD.AboutAdd
+{
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 12pt;
+    FONT-WEIGHT: bolder
+}
+TD.AboutAddDetail
+{
+    BORDER-BOTTOM: lightskyblue 1px solid;
+    BORDER-LEFT: lightskyblue;
+    BORDER-RIGHT: lightskyblue;
+    BORDER-TOP: lightskyblue;
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 10pt
+}
+A
+{
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 10pt
+}
+A:active
+{
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 10pt
+}
+A:visited
+{
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 10pt
+}
+A:hover
+{
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 10pt
+}
+TD.normal
+{
+    FONT-FAMILY: Arial;
+    FONT-SIZE: 10pt
+}
+
+IMG.Pic
+{
+    BORDER-BOTTOM: blue thin outset;
+    BORDER-LEFT: blue thin outset;
+    BORDER-RIGHT: blue thin outset;
+    BORDER-TOP: blue thin outset
+}
+TD.PicCell-Blue
+{
+    BORDER-BOTTOM: deepskyblue 1px solid;
+    BORDER-LEFT: deepskyblue 1px solid;
+    BORDER-RIGHT: deepskyblue 1px solid;
+    BORDER-TOP: deepskyblue 1px solid
+}
+TD.PicCell-Red
+{
+    BORDER-BOTTOM: hotpink 1px solid;
+    BORDER-LEFT: hotpink 1px solid;
+    BORDER-RIGHT: hotpink 1px solid;
+    BORDER-TOP: hotpink 1px solid
+}
+TD.PicCell-Green
+{
+    BORDER-BOTTOM: plum 1px solid;
+    BORDER-LEFT: plum 1px solid;
+    BORDER-RIGHT: plum 1px solid;
+    BORDER-TOP: plum 1px solid
+}
+TD.PicCell-Yellow
+{
+    BORDER-BOTTOM: gold 1px solid;
+    BORDER-LEFT: gold 1px solid;
+    BORDER-RIGHT: gold 1px solid;
+    BORDER-TOP: gold 1px solid;
+    PADDING-TOP: 0px
+}
+TD.PicCell-Brown
+{
+    BORDER-BOTTOM: indianred 1px solid;
+    BORDER-LEFT: indianred 1px solid;
+    BORDER-RIGHT: indianred 1px solid;
+    BORDER-TOP: indianred 1px solid
+}

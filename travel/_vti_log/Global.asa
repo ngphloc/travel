@@ -1,0 +1,56 @@
+<script language=vbscript runat=server>
+Sub Application_OnStart()
+	Application("Rows")= 20
+	Application("Cols")= 16
+	
+End Sub
+
+Sub Application_OnEnd()
+End Sub
+
+Sub Session_OnStart() 
+	Session("selection")=""
+
+	Session("Wildcards") = "%"
+	Session("Access") = false ' co quyen truy cap
+	Session("Language") = "English"
+	'Session("cnString") ="Provider=SQLOLEDB.1;Persist Security Info=False;User ID=sa;Initial Catalog=Travel;Data Source=(local)"
+	Session("cnString") = "DRIVER={Microsoft Access Driver (*.mdb)};DBQ=" & Server.MapPath("/Travel/data/Travel.mdb")  
+	Session("SQL") = ""
+	Session("selectStr")=""
+	Session("idStr")=""
+	Session("zoom")=1
+	Session("visit")=false
+	Session("mode")="normal"
+	Session("w")=4	
+	Session("h")=4	
+	Session("chk")=0
+	Session("tourSelect")=0
+	Session("lid")=""
+	Session("Simple")=""	
+
+	Session("fit")="no"   'Do rong theo y khong the session neu la yes
+	Session("fast")="yes"  'co yeu cau ve toc do
+	Session("ParentWidth")= 165
+	Session("ParentHeight")= 136
+
+	Session("TotalWidth")=4336
+	Session("TotalHeight")=3552
+	Session("Widths")="268_268_268_268_268_268_268_268_268_268_268_268_268_268_268_316"
+	Session("Heights")="177_177_177_177_177_177_177_177_177_177_177_177_177_177_177_177_177_177_177_189"
+
+	Session("part0")="0_0"
+	Session("part1")="0_1"
+	Session("part2")="1_0"
+	Session("part3")="1_1"
+End Sub
+
+Sub Session_OnEnd()
+End Sub
+
+'Sub OnTransactionCommit()
+'End Sub
+'Sub OnTransactionAbort()
+'End Sub
+
+</script>

@@ -1,0 +1,365 @@
+<script language="JavaScript1.2">
+<!--
+	function max(a,b) {
+		return ((a>b)?a:b)
+	}
+	function min(a,b) {
+		return ((a<b)?a:b)
+	}
+	function urlEncode(str) {
+		var s="";
+		list=str.split(" ");
+		for(i=0;i<list.length;i++)
+			s=s+list[i]+"%20";
+		return s;			
+	}
+	function isInRect(x,y,x1,y1,x2,y2) {
+		if(x>=x1 && x<=x2 && y>=y1 && y<=y2)
+			return true;
+		return false;
+	}
+	function isInShape(shape,x,y) {
+		if(shape==null || shape=="")
+			return -1;
+		shapeList=shape.split(";");
+		len=shapeList.length;
+		for(i=0;i<len;i++) {
+			list=((String)(shapeList[i])).split(",");
+			x1=list[0];y1=list[1];
+			x2=list[2];y2=list[3];
+			if(isInRect(x,y,x1,y1,x2,y2))
+				return i;
+		}
+		return -1;
+	}
+	function findArea(img,x,y) {
+		w=img.width;h=img.height;
+		cX=w/2;cY=h/2;
+		if(cX==0||cY==0||x<0||y<0||x>=w||y>=h) return -1;
+			
+		if(x<=cX)
+		{
+			if(y<=cY)	
+				return 0;//LEFTTOP
+			else 	
+				return 2;//LEFTBOTTOM
+		}
+		else
+		{
+			if(y<=cY)
+				return 1;//RIGHTTOP
+			else
+				return 3;//RIGHTBOTTOM
+		}
+	}
+	function findAreaEx(w,h,x,y) {
+		cX=w/2;cY=h/2;
+		if(cX==0||cY==0||x<0||y<0||x>=w||y>=h) return -1;
+			
+		if(x<=cX)
+		{
+			if(y<=cY)	
+				return 0;//LEFTTOP
+			else 	
+				return 2;//LEFTBOTTOM
+		}
+		else
+		{
+			if(y<=cY)
+				return 1;//RIGHTTOP
+			else
+				return 3;//RIGHTBOTTOM
+		}
+	}
+	function find4Neighbour(image,m,n,i,j,x,y,part) {//part:String array
+		var area,k;
+		if(m==0 || n==0 || i<0 || i>=m || j<0 || j>=n)
+			return false;
+		area=findArea(image,x,y);
+		if(area==-1)
+			return false;
+			
+		var	common=false, label=0xFF;	
+		if(i==0) {
+			if(j==0)
+				label=0;
+			else if(j==n-1)
+				label =1;
+			else if(area==1 || area==3)
+				label=0;
+			else
+				label=1;
+		}
+		else if(i==m-1) {
+			if(j==0)
+				label=2;
+			else if(j==n-1)
+				label=3;
+			else if (area==1 || area==3)
+				label=2;
+			else
+				label =3;
+		}
+		else {
+			if(j==0) {
+				if(area==0 ||area==1 )
+					label=2;
+				else
+					label=0;
+			}
+			else if(j==n-1) {
+				if(area==0 ||area==1 )
+					label=3;
+				else
+					label=1;
+			}
+			else
+				common=true;
+		}
+		if(common) {
+			switch(area) {
+				case 0:
+					label=3;
+					break;
+				case 1:
+					label=2;
+					break;
+				case 2:
+					label=1;
+					break;
+				case 3:
+					label=0;
+					break;
+			}
+		}
+		switch(label) {
+			case 0:
+				part[0]=""+i+"_"+j;     part[1]=""+i+"_"+(j+1);
+				part[2]=""+(i+1)+"_"+j; part[3]=""+(i+1)+"_"+(j+1);
+				break;
+			case 1:
+				part[0]=""+i+"_"+(j-1);     part[1]=""+i+"_"+j;
+				part[2]=""+(i+1)+"_"+(j-1); part[3]=""+(i+1)+"_"+j;
+				break;
+			case 2:
+				part[0]=""+(i-1)+"_"+j;     part[1]=""+(i-1)+"_"+(j+1);
+				part[2]=""+i+"_"+j;         part[3]=""+i+"_"+(j+1);
+				break;
+			case 3:
+				part[0]=""+(i-1)+"_"+(j-1);     part[1]=""+(i-1)+"_"+j;
+				part[2]=""+i+"_"+(j-1);         part[3]=""+i+"_"+j;
+				break;
+			default:
+				return false;
+		}
+		return true;
+	}
+	
+	function find4NeighbourEx(w,h,m,n,i,j,x,y,part) {//part:String array
+		var area,k;
+		if(m==0 || n==0 || i<0 || i>=m || j<0 || j>=n)
+			return false;
+		area=findAreaEx(w,h,x,y);
+		if(area==-1)
+			return false;
+			
+		var	common=false, label=0xFF;	
+		if(i==0) {
+			if(j==0)
+				label=0;
+			else if(j==n-1)
+				label =1;
+			else if(area==1 || area==3)
+				label=0;
+			else
+				label=1;
+		}
+		else if(i==m-1) {
+			if(j==0)
+				label=2;
+			else if(j==n-1)
+				label=3;
+			else if (area==1 || area==3)
+				label=2;
+			else
+				label =3;
+		}
+		else {
+			if(j==0) {
+				if(area==0 ||area==1 )
+					label=2;
+				else
+					label=0;
+			}
+			else if(j==n-1) {
+				if(area==0 ||area==1 )
+					label=3;
+				else
+					label=1;
+			}
+			else
+				common=true;
+		}
+		if(common) {
+			switch(area) {
+				case 0:
+					label=3;
+					break;
+				case 1:
+					label=2;
+					break;
+				case 2:
+					label=1;
+					break;
+				case 3:
+					label=0;
+					break;
+			}
+		}
+		switch(label) {
+			case 0:
+				part[0]=""+i+"_"+j;     part[1]=""+i+"_"+(j+1);
+				part[2]=""+(i+1)+"_"+j; part[3]=""+(i+1)+"_"+(j+1);
+				break;
+			case 1:
+				part[0]=""+i+"_"+(j-1);     part[1]=""+i+"_"+j;
+				part[2]=""+(i+1)+"_"+(j-1); part[3]=""+(i+1)+"_"+j;
+				break;
+			case 2:
+				part[0]=""+(i-1)+"_"+j;     part[1]=""+(i-1)+"_"+(j+1);
+				part[2]=""+i+"_"+j;         part[3]=""+i+"_"+(j+1);
+				break;
+			case 3:
+				part[0]=""+(i-1)+"_"+(j-1);     part[1]=""+(i-1)+"_"+j;
+				part[2]=""+i+"_"+(j-1);         part[3]=""+i+"_"+j;
+				break;
+			default:
+				return false;
+		}
+		return true;
+	}
+	function getCookieVal(offset) {
+		var endstr=document.cookie.indexOf(";",offset);
+		if(endstr==-1)
+			endstr=document.cookie.length;
+		return unescape(document.cookie.substring(offset,endstr));
+	}
+	function GetCookie(name) {
+		var arg=name + "=";
+		var alen=arg.length;
+		var clen=document.cookie.length;
+		var i=0;
+		
+		while(i<clen) {
+			var j=i+alen;
+			if(document.cookie.substring(i,j)==arg)
+				return getCookieVal(j);
+			i=document.cookie.indexOf(" ",i)+1;
+			if(i==0) break;
+		}
+		return null;
+	}
+	function SetCookie(name, value) {
+		var argv=SetCookie.arguments;
+		var argc=SetCookie.arguments.length;
+		var expires=(argc>2)?argv[2]:null;
+		var path=(argc>3)?argv[3]:null;
+		var domain=(argc>4)?argv[4]:null;
+		var secure=(argc>5)?argv[5]:false;
+		
+		document.cookie = name + "=" + escape(value) + 
+			((expires==null)?"": ("; expires="+expires.toGMTString()) ) +
+			((path==null)?"": ("; path="+path) ) + 
+			((domain==null)?"": ("; domain="+domain) ) + 
+			((secure==false)? "": "; secure" ); 
+	}
+	function DeleteCookie(name) {
+		var exp=new Date();
+		exp.setTime(exp.getTime()-1);
+		var cval=GetCookie(name);
+		document.cookie=name + "=" + cval + "; expires=" + exp.toGMTString();
+	}
+	
+	function findX(images,i,j,x0) {
+		xNew=x0;
+		for(k=0;k<j;k++)
+			xNew=1*xNew+images[i*2+k*1].width;
+		return xNew;
+	}
+	function findXX(widths,i,j,x0) {
+		listWidths=widths.split("_");
+		if(listWidths.length!=4)
+			return -1;
+		xNew=x0;
+		for(k=0;k<j;k++)
+			xNew=1*xNew+1*listWidths[i*2+k*1];
+		return xNew;
+	}
+	function findY(images,i,j,y0) {
+		yNew=y0;
+		for(h=0;h<i;h++)
+			yNew=1*yNew+images[h*2+j*1].height;
+		return yNew;
+	}
+	function findYY(heights,i,j,y0) {
+		listHeights=heights.split("_");
+		if(listHeights.length!=4)
+			return -1;
+		yNew=y0;
+		for(h=0;h<i;h++)
+			yNew=1*yNew+1*listHeights[h*2+j*1];
+		return yNew;
+	}
+	
+	function findSubX(images,i,j,x0) {
+		xNew=x0;
+		for(k=0;k<j;k++)
+			xNew=1*xNew-images[i*2+k*1].width;
+		return xNew;
+	}
+	function findSubXX(widths,i,j,x0) {
+		listWidths=widths.split("_");
+		if(listWidths.length!=4)
+			return -1;
+		xNew=x0;
+		for(k=0;k<j;k++)
+			xNew=1*xNew-1*listWidths[i*2+k*1];
+		return xNew;
+	}
+	function findSubXXEx(widths,j,x0) {
+		listWidths=widths.split("_");
+		if(listWidths.length<=j)
+			return -1;
+		xNew=x0;
+		for(k=0;k<j;k++)
+			xNew=1*xNew-1*listWidths[k*1];
+		return xNew;
+	}
+	function findSubY(images,i,j,y0) {
+		yNew=y0;
+		for(h=0;h<i;h++)
+			yNew=1*yNew-images[h*2+j*1].height;
+		return yNew;
+	}
+	function findSubYY(heights,i,j,y0) {
+		listHeights=heights.split("_");
+		if(listHeights.length!=4)
+			return -1;
+		yNew=y0;
+		for(h=0;h<i;h++)
+			yNew=1*yNew-1*listHeights[h*2+j*1];
+		return yNew;
+	}
+	function findSubYYEx(heights,i,y0) {
+		listHeights=heights.split("_");
+		if(listHeights.length<=i)
+			return -1;
+		yNew=y0;
+		for(h=0;h<i;h++)
+			yNew=1*yNew-1*listHeights[h*1];
+		return yNew;
+	}
+	
+	
+//-->
+</script>
